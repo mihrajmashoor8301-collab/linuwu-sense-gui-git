@@ -14,7 +14,7 @@ PROFILE = BASE + "/platform-profile/platform-profile-0"
 FAN = PS + "/fan_speed"
 BAT = PS + "/battery_limiter"
 USB = PS + "/usb_charging"
-PROFILE_SOCKET = "/run/linuwu-profile-helper/profile.sock"
+PROFILE_SOCKET = "/run/predsenselinux-profile-helper/profile.sock"
 PROFILES = ("low-power", "quiet", "balanced", "balanced-performance", "performance")
 HWMON = pathlib.Path("/sys/class/hwmon")
 NVIDIA_SMI = shutil.which("nvidia-smi")
@@ -142,6 +142,6 @@ ttk.Label(c, text="USB Charging").grid(row=0, column=1, padx=(20, 5))
 ttk.Spinbox(c, from_=0, to=100, textvariable=usb, width=6, command=lambda: write(USB, usb.get())).grid(row=0, column=2)
 ttk.Button(c, text="Apply", command=lambda: write(USB, usb.get())).grid(row=0, column=3, padx=5)
 
-ttk.Label(root, text="Controls use the existing Linuwu-Sense sysfs interface.", foreground="gray").pack(pady=14)
+ttk.Label(root, text="Controls use the installed Predator Linux kernel interface.", foreground="gray").pack(pady=14)
 refresh()
 root.mainloop()

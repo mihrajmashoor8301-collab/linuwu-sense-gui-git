@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Narrow privileged Unix-socket service for Linuwu-Sense profile writes."""
+"""Narrow privileged Unix-socket service for PredSenseLinux profile writes."""
 import json
 import os
 import signal
@@ -7,7 +7,7 @@ import socket
 import stat
 import sys
 
-SOCKET_DIR = "/run/linuwu-profile-helper"
+SOCKET_DIR = "/run/predsenselinux-profile-helper"
 SOCKET_PATH = SOCKET_DIR + "/profile.sock"
 PROFILE_PATH = "/sys/devices/platform/acer-wmi/platform-profile/platform-profile-0/profile"
 ALLOWED = frozenset(("low-power", "quiet", "balanced", "balanced-performance", "performance"))

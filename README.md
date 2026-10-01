@@ -24,8 +24,8 @@ GPU temperature is read using `nvidia-smi` when it is installed and the NVIDIA d
 Replace the URL below with the GitHub or GitLab URL where this project is hosted:
 
 ```bash
-git clone <REPOSITORY_URL> linuwu-sense-gui
-cd linuwu-sense-gui
+git clone <REPOSITORY_URL> predsenselinux
+cd predsenselinux
 ```
 
 If you downloaded a source archive instead, extract it and `cd` into the extracted project directory.
@@ -51,7 +51,7 @@ The module build needs matching headers for `uname -r`. On Kali, install or upda
 
 The automated module script stops if it detects Secure Boot enabled. Disable Secure Boot in firmware to use this option, or manually build, sign, and enroll the module by following the upstream `module_signing_readme`. The GUI and helper are not installed until the module step succeeds.
 
-The script asks `sudo` to install the GUI under `/opt/linuwu-gui`, install the root-owned profile helper under `/usr/local/lib/linuwu-profile-helper`, add your account to the `linuwu_sense` group, install the systemd unit and desktop entry, then enable and start the helper service. Enter your own password at the sudo prompt. **Do not launch the GUI with `sudo`.**
+The script asks `sudo` to install PredSenseLinux under `/opt/predsenselinux`, install its root-owned profile helper under `/usr/local/lib/predsenselinux-profile-helper`, add your account to the `linuwu_sense` group, install the systemd unit and desktop entry, then enable and start the helper service. Enter your own password at the sudo prompt. **Do not launch the GUI with `sudo`.**
 
 The helper is restricted to changing the profile sysfs attribute. The GUI sends it requests over a local Unix socket. It accepts only these profile values:
 
@@ -74,15 +74,15 @@ Open **PredSenseLinux** from the desktop application menu. The installed launche
 Check that the privileged helper is enabled and running:
 
 ```bash
-systemctl is-enabled linuwu-profile-helper.service
-systemctl is-active linuwu-profile-helper.service
-systemctl status linuwu-profile-helper.service --no-pager
+systemctl is-enabled predsenselinux-profile-helper.service
+systemctl is-active predsenselinux-profile-helper.service
+systemctl status predsenselinux-profile-helper.service --no-pager
 ```
 
 Expected results are `enabled` and `active`. Check the socket owner and permissions:
 
 ```bash
-stat -c '%A %U:%G %n' /run/linuwu-profile-helper/profile.sock
+stat -c '%A %U:%G %n' /run/predsenselinux-profile-helper/profile.sock
 ```
 
 Expected output includes `srw-rw---- root:linuwu_sense`.
@@ -110,8 +110,8 @@ done
 Check the service and its recent log messages:
 
 ```bash
-systemctl status linuwu-profile-helper.service --no-pager
-journalctl -u linuwu-profile-helper.service -b --no-pager
+systemctl status predsenselinux-profile-helper.service --no-pager
+journalctl -u predsenselinux-profile-helper.service -b --no-pager
 ```
 
 Confirm your account is in the helper group:
@@ -146,11 +146,11 @@ Check that `/sys/class/hwmon` contains a device whose `name` is `acer`, with `fa
 Run these commands to stop and remove the GUI and profile helper:
 
 ```bash
-sudo systemctl disable --now linuwu-profile-helper.service
-sudo rm -f /etc/systemd/system/linuwu-profile-helper.service
-sudo rm -f /etc/default/linuwu-profile-helper
-sudo rm -f /usr/share/applications/linuwu-sense.desktop
-sudo rm -rf /opt/linuwu-gui /usr/local/lib/linuwu-profile-helper
+sudo systemctl disable --now predsenselinux-profile-helper.service
+sudo rm -f /etc/systemd/system/predsenselinux-profile-helper.service
+sudo rm -f /etc/default/predsenselinux-profile-helper
+sudo rm -f /usr/share/applications/predsenselinux.desktop
+sudo rm -rf /opt/predsenselinux /usr/local/lib/predsenselinux-profile-helper
 sudo systemctl daemon-reload
 ```
 

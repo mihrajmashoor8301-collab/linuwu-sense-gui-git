@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=PredSenseLinux
 Comment=Acer Predator Linux fan and performance control
-Exec=/opt/linuwu-gui/launch.sh
+Exec=/opt/predsenselinux/predsenselinux-launch.sh
 Icon=computer
 Terminal=false
 Type=Application
